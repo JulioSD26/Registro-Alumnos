@@ -26,6 +26,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;
+import java.awt.event.KeyEvent;
 
 
 import java.io.IOException;
@@ -96,6 +97,17 @@ public class RegistroAlumnos extends javax.swing.JFrame {
         jLabelGrupo.setText("Grupo:");
 
         jLabelCodigo.setText("Ingresa el código del alumno:");
+
+        jTextFieldBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldBuscarMouseClicked(evt);
+            }
+        });
+        jTextFieldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscarKeyPressed(evt);
+            }
+        });
 
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +187,13 @@ public class RegistroAlumnos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void LimpiarCampos (){
+        jTextFieldBuscar.setText(null);
+        jTextFieldNombre.setText(null);
+        jTextFieldGrupo.setText(null);
+    }
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
+
         // Crear la conexión a la base de datos
         try{ 
             // ruta , usuario, contraseña
@@ -194,8 +212,7 @@ public class RegistroAlumnos extends javax.swing.JFrame {
             pst.executeUpdate();
             
             // reiniciar los campos de texto
-            jLabelNombre.setText(null);
-            jLabelGrupo.setText(null);
+            LimpiarCampos();
             
             // mostrar en el jlabel un mensaje
             jLabelStatus.setText("Registro exitoso");
@@ -358,6 +375,19 @@ public class RegistroAlumnos extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButtonCrearRegistroActionPerformed
+
+    private void jTextFieldBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldBuscarMouseClicked
+        // TODO add your handling code here:
+        // Si los demás campos tienen texto se limpiara
+        LimpiarCampos();
+    }//GEN-LAST:event_jTextFieldBuscarMouseClicked
+
+    private void jTextFieldBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarKeyPressed
+        // Cuando se presiona la tecla enter se dara click en el boton buscar
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            jButtonBuscar.doClick();
+        }
+    }//GEN-LAST:event_jTextFieldBuscarKeyPressed
 
     /**
      * @param args the command line arguments
