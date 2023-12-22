@@ -273,8 +273,7 @@ public class RegistroAlumnos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jButtonCrearRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearRegistroActionPerformed
-        // BORRAR
-        System.out.println("Se aplasto el botón pdf");
+
         // Crear un objeto de la clase Document
         
         Document documento = new Document();
@@ -283,8 +282,6 @@ public class RegistroAlumnos extends javax.swing.JFrame {
             // guardamos en una variable la ruta donde queremos guardar el archivo PDF
             // el user.home devuelve en mi caso C:\Users\Julio
             String ruta = System.getProperty("user.home");
-            // BORRAR
-            System.out.println("la ruta es: " + ruta);
             // donde lo va a guardar y su nombre la extension pdf
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Alumnos.pdf"));
             
@@ -307,8 +304,6 @@ public class RegistroAlumnos extends javax.swing.JFrame {
 
             // abrir el documento
             documento.open();
-            // BORRAR
-            System.out.println("documento abierto");
             //insertar la imagen y el parrafo
             documento.add(header);
             documento.add(parrafo);
@@ -341,8 +336,6 @@ public class RegistroAlumnos extends javax.swing.JFrame {
                         tabla.addCell(rs.getString(2));
                          // columna del grupo
                         tabla.addCell(rs.getString(3));
-                        // BORRAR
-                         System.out.println("Los datos son: " + rs.getString(2));
                         
                     } while (rs.next());
                      documento.add(tabla);
@@ -351,13 +344,9 @@ public class RegistroAlumnos extends javax.swing.JFrame {
                 // le agregamos los errores que le corresponden
             }catch(DocumentException | SQLException e){
                 JOptionPane.showMessageDialog(null, "Error en la conexion \n"+e);
-                // BORRAR
-                System.out.println("error en la conexión...");
             }
             // cerrar el documento
             documento.close();
-            // BORRAR
-            System.out.println("se cerro el documento");
             // mostrar mensaje de reporte creado
             JOptionPane.showMessageDialog(null, "Reporte creado.");
             
